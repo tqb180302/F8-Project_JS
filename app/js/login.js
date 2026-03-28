@@ -25,8 +25,7 @@ formDangNhap.addEventListener('submit', async function(event) {
 
 
         if (response.ok) {
-            console.log("2. Đăng nhập thành công! Token của bạn là:", data.token);
-            localStorage.setItem('accessToken', data.token);
+            localStorage.setItem('accessToken', data['token'])
             window.location.href = 'index.html';
         } else {
 
