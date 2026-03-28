@@ -7,7 +7,6 @@ formDangNhap.addEventListener('submit', async function(event) {
     const emailDienVao = document.getElementById('email').value;
     const matKhauDienVao = document.getElementById('password').value;
 
-    console.log("1. Đang gửi dữ liệu lên Server...");
 
     try {
         const response = await fetch('https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com/auth/signin', {
