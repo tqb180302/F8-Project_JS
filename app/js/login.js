@@ -1,4 +1,3 @@
-
 const formDangNhap = document.getElementById('login-form');
 
 formDangNhap.addEventListener('submit', async function(event) {
@@ -20,18 +19,17 @@ formDangNhap.addEventListener('submit', async function(event) {
             })
         });
 
-        const data = await response.json();
-
-
         if (response.ok) {
-            localStorage.setItem('accessToken', data['token'])
+            const data = await response.json();
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
             window.location.href = 'index.html';
         } else {
-
-            alert("Đăng nhập thất bại: " + data.message);
-            console.log("Lỗi từ server:", data);
+            alert("Đăng nhập thất bại: Vui lòng kiểm tra lại Email hoặc Mật khẩu!");
         }
+
     } catch (error) {
         console.log("Lỗi mạng không gọi được API:", error);
+        alert("Không thể kết nối đến máy chủ. Vui lòng thử lại sau!");
     }
 });

@@ -59,3 +59,23 @@ td { padding: 15px; border-bottom: 1px solid #eee; vertical-align: middle; }
 .modal-content input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
 .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
 .btn-cancel { background: #bdc3c7; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+
+
+.sidebar ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.sidebar ul li:hover a,
+.sidebar ul li.active a {
+    color: var(--primary-color);
+}
+
+.sidebar ul li a i {
+    color: inherit;
+}
