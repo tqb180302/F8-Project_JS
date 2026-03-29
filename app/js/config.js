@@ -27,7 +27,7 @@ async function request(endpoint, method = 'GET', data = null) {
         if (response.status === 401) {
             alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
             localStorage.removeItem('accessToken');
-            window.location.href = LOGIN_PATH; // ✅ Sửa chỗ này
+            window.location.href = LOGIN_PATH;
             return null;
         }
 
@@ -43,7 +43,7 @@ async function request(endpoint, method = 'GET', data = null) {
     }
 }
 
-export const api = { // ✅ Thêm export
+export const api = {
     get: (endpoint) => request(endpoint, 'GET'),
     post: (endpoint, data) => request(endpoint, 'POST', data),
     put: (endpoint, data) => request(endpoint, 'PUT', data),
