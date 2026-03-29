@@ -70,7 +70,7 @@ window.loadProducts = async function() {
     try {
         const token = localStorage.getItem('accessToken');
         if (!token) {
-            window.location.href = '../login.html';
+            window.location.href = '/login.html';
             return;
         }
 
@@ -85,7 +85,7 @@ window.loadProducts = async function() {
         if (response.status === 401) {
             alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
             localStorage.removeItem('accessToken');
-            window.location.href = '../login.html';
+            window.location.href = '/login.html';
             return;
         }
 
@@ -170,7 +170,6 @@ if (selectBoLoc) {
     });
 }
 
-// Sự kiện gõ tìm kiếm (Chống lag bằng Debounce 0.5s)
 const searchInput = document.getElementById('searchInput');
 if (searchInput) {
     let timeout = null;
@@ -197,7 +196,7 @@ window.deleteProduct = async function(id) {
 
         if (response.status === 401) {
             alert("Phiên đăng nhập hết hạn!");
-            window.location.href = '../login.html';
+            window.location.href = '/login.html';
             return;
         }
 

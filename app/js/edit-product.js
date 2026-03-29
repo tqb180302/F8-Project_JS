@@ -88,7 +88,7 @@ form.addEventListener('submit', async function(e) {
     try {
         const token = localStorage.getItem('accessToken');
         const response = await fetch(`https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com/products/${productId}`, {
-            method: 'PUT', //Dùng PUT để cập nhật sửa chữa
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

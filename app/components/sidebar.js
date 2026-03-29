@@ -2,33 +2,34 @@ const pageTitles = [
     {
         title: "Tổng quan",
         icon: `<i class="fas fa-home"></i>`,
-        path: "/index.html",
+        path: "/app/dashboard/index.html",
     },
     {
         title: "Sản phẩm",
         icon: `<i class="fas fa-box"></i>`,
-        path: "/products/index.html",
+        path: "/app/products/index.html",
     },
     {
         title: "Đơn hàng",
         icon: `<i class="fas fa-shopping-bag"></i>`,
-        path: "/orders/index.html",
+        path: "/app/orders/index.html",
     },
     {
         title: "Khách hàng",
         icon: `<i class="fas fa-users"></i>`,
-        path: "/customers/index.html",
+        path: "/app/customers/index.html",
     },
     {
         title: "Báo cáo",
         icon: `<i class="fas fa-chart-line"></i>`,
-        path: "/reports/index.html",
+        path: "/app/reports/index.html",
     },
 ];
 
 export function sidebar() {
 
     const currentPath = window.location.pathname;
+    const base = currentPath.split('/app/')[0];
 
     return `
         <h2 class="">ShopAdmin</h2>
@@ -38,7 +39,7 @@ export function sidebar() {
 
         return `
                     <li class="${isActive ? "active" : ""}">
-                        <a href="..${item.path}" data-link>
+                        <a href="${base}${item.path}" data-link>
                             <span class="">${item.icon}</span>
                             ${item.title}
                         </a>

@@ -1,3 +1,6 @@
+export const BASE_PATH = '/F8-Project_JS';
+export const LOGIN_PATH = BASE_PATH + '/login.html';
+
 const API_DOMAIN = "https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com";
 
 async function request(endpoint, method = 'GET', data = null) {
@@ -24,7 +27,7 @@ async function request(endpoint, method = 'GET', data = null) {
         if (response.status === 401) {
             alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
             localStorage.removeItem('accessToken');
-            window.location.href = '../login.html';
+            window.location.href = LOGIN_PATH; // ✅ Sửa chỗ này
             return null;
         }
 
@@ -40,7 +43,7 @@ async function request(endpoint, method = 'GET', data = null) {
     }
 }
 
-const api = {
+export const api = { // ✅ Thêm export
     get: (endpoint) => request(endpoint, 'GET'),
     post: (endpoint, data) => request(endpoint, 'POST', data),
     put: (endpoint, data) => request(endpoint, 'PUT', data),
