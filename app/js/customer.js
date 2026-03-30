@@ -13,7 +13,6 @@ function getInitials(name) {
     return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
 }
 
-
 const customerColumns = [
     {
         title: 'Khách hàng',
@@ -56,10 +55,9 @@ const customerColumns = [
     }
 ];
 
-
 async function loadCustomers() {
     const token = localStorage.getItem('accessToken');
-    if (!token) return window.location.href = '/login.html';
+    if (!token) return window.location.href = '../login.html';
 
     try {
         const custRes = await fetch('https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com/customers', {
@@ -82,7 +80,9 @@ async function loadCustomers() {
                 rawOrders.forEach(order => {
                     if (order.customer && order.customer.id && order.status !== 'cancel') {
                         const total = (order.product?.price || 0) * (order.amount || 1);
-                        spendingMap[String(order.customer.id)] = (spendingMap[String(order.customer.id)] || 0) + total;
+                        // ĐÃ FIX LỖI "cid is not defined" Ở ĐÂY
+                        const cid = String(order.customer.id);
+                        spendingMap[cid] = (spendingMap[cid] || 0) + total;
                         orderCountMap[cid] = (orderCountMap[cid] || 0) + 1;
                     }
                 });
@@ -90,7 +90,6 @@ async function loadCustomers() {
         } catch (e) {
             console.warn("Không lấy được API Đơn hàng, tạm thời tổng tiền = 0");
         }
-
 
         globalCustomerList = rawCustomers.map(c => ({
             ...c,
@@ -107,10 +106,9 @@ async function loadCustomers() {
 
     } catch (error) {
         console.error("Lỗi:", error);
-        document.getElementById('table-container').innerHTML = `<p style="color: red; padding: 20px;">Lỗi tải dữ liệu: Vui lòng Đăng nhập lại!</p>`;
+        document.getElementById('table-container').innerHTML = `<p style="color: red; padding: 20px;">Lỗi tải dữ liệu. Bạn có thể cần <a href="../login.html">Đăng nhập lại</a>!</p>`;
     }
 }
-
 
 function renderCustomers(list, keyword, rankFilter = 'ALL', returnRate = 0) {
     let filteredList = list;
@@ -132,7 +130,6 @@ function renderCustomers(list, keyword, rankFilter = 'ALL', returnRate = 0) {
     commonTable('#table-container', customerColumns, filteredList);
 }
 
-
 const searchInput = document.getElementById('searchCustomer');
 const rankSelect = document.getElementById('rankFilter');
 
@@ -150,7 +147,6 @@ window.openCustomerModal = (id, currentRank) => {
     document.getElementById('editCustRank').value = currentRank.toUpperCase();
     document.getElementById('customerModal').style.display = 'flex';
 }
-
 window.closeCustomerModal = () => document.getElementById('customerModal').style.display = 'none';
 
 window.saveCustomerRank = async () => {
@@ -177,6 +173,60 @@ window.saveCustomerRank = async () => {
         }
     } catch (error) {
         alert('Lỗi mạng!');
+    }
+}
+
+
+window.openAddCustomerModal = () => {
+    document.getElementById('addCustName').value = '';
+    document.getElementById('addCustEmail').value = '';
+    document.getElementById('addCustPhone').value = '';
+    document.getElementById('addCustomerModal').style.display = 'flex';
+}
+
+window.closeAddCustomerModal = () => {
+    document.getElementById('addCustomerModal').style.display = 'none';
+}
+
+window.saveNewCustomer = async () => {
+    const name = document.getElementById('addCustName').value.trim();
+    const email = document.getElementById('addCustEmail').value.trim();
+    const phone = document.getElementById('addCustPhone').value.trim();
+    const token = localStorage.getItem('accessToken');
+
+    if (!name || !email) {
+        alert("Vui lòng nhập đầy đủ Tên và Email!");
+        return;
+    }
+
+
+    const newCustomer = {
+        name: name,
+        email: email,
+        phone: phone,
+        rank: "BRONZE"
+    };
+
+    try {
+        const response = await fetch('https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com/customers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(newCustomer)
+        });
+
+        if (response.ok) {
+            alert('Đã thêm khách hàng mới thành công!');
+            closeAddCustomerModal();
+            loadCustomers();
+        } else {
+            const errData = await response.json();
+            alert(`Lỗi Server: ${errData.message || response.status}`);
+        }
+    } catch (error) {
+        alert('Lỗi mạng, không thể kết nối tới Server!');
     }
 }
 
