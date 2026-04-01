@@ -63,7 +63,6 @@ async function loadDashboard() {
     }
 }
 
-
 function renderDashboard(orderList) {
     const totalRevenue = orderList.reduce((sum, row) => {
         const prod = row.product || {};
@@ -85,7 +84,6 @@ function renderDashboard(orderList) {
         </div>
     `;
     document.getElementById('summary-container').innerHTML = summaryDOM;
-
 
     const recentOrders = orderList.slice(0, 5);
     commonTable('#table-container', orderColumns, recentOrders);

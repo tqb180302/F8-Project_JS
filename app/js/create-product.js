@@ -24,8 +24,8 @@ async function loadCategories() {
 
             categoryList.forEach(category => {
                 const option = document.createElement('option');
-                option.value = category.id;   // Mã ID (VD: 38)
-                option.textContent = category.name; // Tên hiển thị (VD: Điện Thoại)
+                option.value = category.id;
+                option.textContent = category.name;
                 selectElement.appendChild(option);
             });
 
@@ -35,9 +35,7 @@ async function loadCategories() {
     }
 }
 
-
 loadCategories();
-
 
 
 const form = document.getElementById('productForm');

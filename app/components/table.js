@@ -5,7 +5,6 @@ export function commonTable(container, columns, dataSource) {
     const table = document.createElement("table");
     table.className = "common-table";
 
-
     const thead = document.createElement("thead");
     const trHead = document.createElement("tr");
     columns.forEach((col) => {

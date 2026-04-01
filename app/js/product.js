@@ -21,9 +21,7 @@ window.capNhatThongKe = function() {
     container.appendChild(createSummary(summaryData));
 }
 
-
 capNhatThongKe();
-
 
 
 const productColumns = [
@@ -63,7 +61,6 @@ const productColumns = [
     `
     }
 ];
-
 
 
 window.loadProducts = async function() {
@@ -129,7 +126,6 @@ window.loadProducts = async function() {
 }
 
 
-
 async function loadCategoriesForFilter() {
     try {
         const token = localStorage.getItem('accessToken');
@@ -160,7 +156,6 @@ async function loadCategoriesForFilter() {
         console.error("Lỗi khi tải bộ lọc danh mục:", error);
     }
 }
-
 
 
 const selectBoLoc = document.getElementById('categoryFilter');

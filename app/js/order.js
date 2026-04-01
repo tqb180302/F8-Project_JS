@@ -78,7 +78,7 @@ window.loadOrders = async function(statusFilter = 'all', searchKeyword = '') {
             document.getElementById('table-container').innerHTML = `
                 <div style="background: #ffebee; color: #c0392b; padding: 20px; border-radius: 8px;">
                     <strong>API trả về lỗi ${response.status}</strong><br>
-                    Vui lòng đăng xuất và đăng nhập lại để làm mới Token!
+                    Vui lòng đăng xuất và đăng nhập lại
                 </div>
             `;
         }
@@ -97,7 +97,6 @@ function processAndRenderOrders(orderList, statusFilter, searchKeyword) {
     const total = orderList.length;
     const pending = orderList.filter(o => o.status === 'pending' || !o.status).length;
 
-    // Đổi chữ tiếng Anh ở đây để nó đếm đúng
     const delivering = orderList.filter(o => o.status === 'delivering').length;
     const done = orderList.filter(o => o.status === 'done').length;
     const cancel = orderList.filter(o => o.status === 'cancel').length;
@@ -214,6 +213,5 @@ window.saveOrderStatus = async function() {
         closeOrderModal();
     }
 }
-
 
 loadOrders();

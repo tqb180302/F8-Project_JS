@@ -1,8 +1,6 @@
 import { sidebar } from '../components/sidebar.js';
 
-
 document.getElementById('sidebar-container').innerHTML = sidebar();
-
 
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
@@ -12,22 +10,16 @@ if (!productId) {
     window.location.href = 'index.html';
 }
 
-
 async function loadProductData() {
     try {
         const token = localStorage.getItem('accessToken');
-
-
         await loadCategories();
-
-
         const response = await fetch(`https://k305jhbh09.execute-api.ap-southeast-1.amazonaws.com/products/${productId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (response.ok) {
             const product = await response.json();
-
 
             document.getElementById('name').value = product.name;
             document.getElementById('price').value = product.price;
@@ -36,8 +28,6 @@ async function loadProductData() {
             document.getElementById('description').value = product.description || '';
             document.getElementById('imageUrl').value = product.imageUrl || '';
             document.getElementById('categoryId').value = product.categoryId;
-
-
             if (product.imageUrl) {
                 document.getElementById('imgPreview').src = product.imageUrl;
             }

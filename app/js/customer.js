@@ -80,7 +80,6 @@ async function loadCustomers() {
                 rawOrders.forEach(order => {
                     if (order.customer && order.customer.id && order.status !== 'cancel') {
                         const total = (order.product?.price || 0) * (order.amount || 1);
-                        // ĐÃ FIX LỖI "cid is not defined" Ở ĐÂY
                         const cid = String(order.customer.id);
                         spendingMap[cid] = (spendingMap[cid] || 0) + total;
                         orderCountMap[cid] = (orderCountMap[cid] || 0) + 1;
@@ -176,7 +175,6 @@ window.saveCustomerRank = async () => {
     }
 }
 
-
 window.openAddCustomerModal = () => {
     document.getElementById('addCustName').value = '';
     document.getElementById('addCustEmail').value = '';
@@ -198,7 +196,6 @@ window.saveNewCustomer = async () => {
         alert("Vui lòng nhập đầy đủ Tên và Email!");
         return;
     }
-
 
     const newCustomer = {
         name: name,
@@ -229,6 +226,5 @@ window.saveNewCustomer = async () => {
         alert('Lỗi mạng, không thể kết nối tới Server!');
     }
 }
-
 
 loadCustomers();
