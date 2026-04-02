@@ -1,8 +1,6 @@
 import { sidebar } from '../components/sidebar.js';
 
-
 document.getElementById('sidebar-container').innerHTML = sidebar();
-
 
 let barChartInstance = null;
 let pieChartInstance = null;

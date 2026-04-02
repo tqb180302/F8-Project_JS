@@ -157,7 +157,6 @@ async function loadCategoriesForFilter() {
     }
 }
 
-
 const selectBoLoc = document.getElementById('categoryFilter');
 if (selectBoLoc) {
     selectBoLoc.addEventListener('change', function() {

@@ -65,7 +65,7 @@ if (form) {
             });
 
             if (response.ok) {
-                alert("Thêm sản phẩm thành công rực rỡ!");
+                alert("Thêm sản phẩm thành công");
                 window.location.href = 'index.html';
             } else {
                 const errorData = await response.json();

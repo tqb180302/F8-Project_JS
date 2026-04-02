@@ -105,7 +105,6 @@ async function loadCustomers() {
 
     } catch (error) {
         console.error("Lỗi:", error);
-        document.getElementById('table-container').innerHTML = `<p style="color: red; padding: 20px;">Lỗi tải dữ liệu. Bạn có thể cần <a href="../login.html">Đăng nhập lại</a>!</p>`;
     }
 }
 

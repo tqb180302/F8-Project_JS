@@ -1,10 +1,9 @@
 import { sidebar } from '../components/sidebar.js';
 import { commonTable } from '../components/table.js';
 
-// 1. RENDER SIDEBAR
 document.getElementById('sidebar-container').innerHTML = sidebar();
 
-// 2. CẤU HÌNH CỘT BẢNG
+
 const orderColumns = [
     { title: 'Mã đơn', render: (text, row) => `#${row.id || 'N/A'}` },
     {
